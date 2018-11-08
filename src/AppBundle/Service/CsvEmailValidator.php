@@ -14,6 +14,29 @@ class CsvEmailValidator implements DocumentValidatorInterface
     const RETURN_INCORRECT = false;
     const RETURN_CORRECT = true;
 
+    public $resumeFilename;
+    public $csvCorrectFilename;
+    public $csvIncorrectFilename;
+    public $csvResumePath;
+    public $csvCorrectPath;
+    public $csvIncorrectPath;
+
+    public function __construct(
+        $resumeFilename,
+        $csvCorrectFilename,
+        $csvIncorrectFilename,
+        $csvResumePath,
+        $csvCorrectPath,
+        $csvIncorrectPath
+    ){
+        $this->resumeFilename = $resumeFilename;
+        $this->csvCorrectFilename = $csvCorrectFilename;
+        $this->csvIncorrectFilename = $csvIncorrectFilename;
+        $this->csvResumePath = $csvResumePath;
+        $this->csvCorrectPath = $csvCorrectPath;
+        $this->csvIncorrectPath = $csvIncorrectPath;
+    }
+
     /**
      * @param Iterator $records
      * @param bool|null $outputType
@@ -69,10 +92,11 @@ class CsvEmailValidator implements DocumentValidatorInterface
      */
     public function createValidationWithResume(Iterator $records)
     {
-        //TODO:improve filename + datetime, move filepaths in the future, better error catching
+        //TODO: move filepaths in the future, better error catching
+
         $emails = $this->validate($records);
         $content = 'Correct emails: ' . key($emails['correct']) . ' Incorrect emails: ' . key($emails['incorrect']);
-        $size = file_put_contents('%kernel.root_dir%/../var/csv/validation-output/resume.txt', nl2br($content));
+        $size = file_put_contents($this->csvResumePath.self::generate() . '.txt', nl2br($content));
 
         return $size;
     }
@@ -86,7 +110,7 @@ class CsvEmailValidator implements DocumentValidatorInterface
     public function createCsvEmailCorrect(Iterator $records)
     {
         $emails = $this->validate($records, self::RETURN_CORRECT);
-        $writer = Writer::createFromPath('%kernel.root_dir%/../var/csv/validation-output/correct.csv', 'w+');
+        $writer = Writer::createFromPath($this->csvCorrectPath . self::generate() . '.csv', 'w+');
         $size = $writer->insertAll($emails);
 
         return $size;
@@ -102,9 +126,18 @@ class CsvEmailValidator implements DocumentValidatorInterface
     public function createCsvEmailIncorrect(Iterator $records)
     {
         $emails = $this->validate($records, self::RETURN_INCORRECT);
-        $writer = Writer::createFromPath('%kernel.root_dir%/../var/csv/validation-output/incorrect.csv', 'w+');
+        $writer = Writer::createFromPath($this->csvIncorrectPath . self::generate() . '.csv', 'w+');
         $size = $writer->insertAll($emails);
 
         return $size;
+    }
+
+    /**
+     * @return string
+     *
+     */
+    public static function generate()
+    {
+        return '_' . date('mdY_His');
     }
 }

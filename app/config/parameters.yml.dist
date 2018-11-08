@@ -17,3 +17,13 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+#Filenames
+    csv_correct_filename: 'CORRECT'
+    csv_incorrect_filename: 'INCORRECT'
+    resume_filename: 'RESUME'
+
+#Paths
+    csv_correct_path: '%kernel.root_dir%/../var/csv/validation-output/%csv_correct_filename%'
+    csv_incorrect_path: '%kernel.root_dir%/../var/csv/validation-output/%csv_incorrect_filename%'
+    resume_path: '%kernel.root_dir%/../var/csv/validation-output/%resume_filename%'

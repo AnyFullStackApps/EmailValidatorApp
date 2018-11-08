@@ -6,6 +6,17 @@ parameters:
 services:
     # default configuration for services in *this* file
     _defaults:
+        bind:
+            $csvCorrectFilename: '%csv_correct_filename%'
+            $csvIncorrectFilename: '%csv_incorrect_filename%'
+            $resumeFilename: '%resume_filename%'
+
+            $csvResumePath: '%resume_path%'
+            $csvCorrectPath: '%csv_correct_path%'
+            $csvIncorrectPath: '%csv_incorrect_path%'
+
+            $csvInputDir: '%csv_input_dir%'
+
         # automatically injects dependencies in your services
         autowire: true
         # automatically registers your services as commands, event subscribers, etc.
