@@ -1,13 +1,22 @@
 Symfony Email Valifation App
 ============================
 
-Using vendors:
-- league/csv - require PHP >= 7.0.10
+## **Using vendors:**
+
+- league/csv
 - egulias/email-validator 
 
-
-#This app also checks DNS record types: MX, A, AAAA
-
-Download this app and run: composer install
+## **Check methods:**
+- ReqEx
+- DNS record types: MX, A, AAAA
+- SMTP in near future
 
 CSV files for testing are located in var which have write permission. Generally I wouldn't keep there ;-)
+
+## **Requirements:**
+
+PHP >= 7.0.10
+
+## **Getting started:**
+Run: *composer install*
+
