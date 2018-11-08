@@ -9,7 +9,12 @@
 namespace AppBundle\Service\Factory;
 
 
-class CsvEmailFactory
-{
+use AppBundle\Service\CsvEmailValidator;
 
+class CsvEmailValidatorFactory extends DocumentValidatorAbstractFactory
+{
+    function createCSVEmailValidator()
+    {
+        return new CsvEmailValidator();
+    }
 }

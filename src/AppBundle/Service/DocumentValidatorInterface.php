@@ -9,7 +9,7 @@
 namespace AppBundle\Service;
 
 
-interface ValidatedDocumentInterface
+interface DocumentValidatorInterface
 {
     public function validate();
 }

@@ -9,11 +9,10 @@
 namespace AppBundle\Service;
 
 
-class CSVEmail implements ValidatedDocumentInterface
+class CsvEmailValidator implements DocumentValidatorInterface
 {
-
     public function validate()
     {
-
+        var_dump('test');die;
     }
 }

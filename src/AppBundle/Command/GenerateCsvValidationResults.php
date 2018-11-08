@@ -2,6 +2,7 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Service\CsvEmailValidator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -9,6 +10,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateCsvValidationResults extends Command
 {
+    /** @var CsvEmailValidator  */
+    private $csvEmailValidator;
+
+    public function __construct(CsvEmailValidator $csvEmailValidator)
+    {
+        $this->csvEmailValidator = $csvEmailValidator;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -20,6 +31,7 @@ class GenerateCsvValidationResults extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->csvEmailValidator->validate();
         return "test";
     }
 }

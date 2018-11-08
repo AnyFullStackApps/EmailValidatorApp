@@ -6,10 +6,9 @@
  * Time: 11:43
  */
 
-namespace AppBundle\Service;
+namespace AppBundle\Service\Factory;
 
-
-abstract class DocumentValidatorFactory
+abstract class DocumentValidatorAbstractFactory
 {
-    abstract function getCSVEmailValidator();
+    abstract function createCSVEmailValidator();
 }
