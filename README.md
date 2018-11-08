@@ -18,5 +18,6 @@ CSV files for testing are located in var which have write permission. Generally 
 PHP >= 7.0.10
 
 ## **Getting started:**
+Add your own data.cv file to test this app
 Run: *composer install*
 

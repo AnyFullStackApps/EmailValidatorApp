@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateCsvValidationResults extends Command
 {
-    //TODO: add progress bar
+    //TODO: add progress bar, csv with header/noheader support
     /** @var CsvEmailValidator  */
     private $csvEmailValidator;
     public $csvInputDir;
