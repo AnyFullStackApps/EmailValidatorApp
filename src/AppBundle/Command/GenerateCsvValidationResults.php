@@ -37,6 +37,8 @@ class GenerateCsvValidationResults extends Command
         $filename = $input->getArgument('filename');
         $reader = Reader::createFromPath('%kernel.root_dir%/../var/csv/'.$filename.'.csv');
         $records = $reader->getRecords();
+        $this->csvEmailValidator->createCsvEmailCorrect($records);
+        $this->csvEmailValidator->createCsvEmailIncorrect($records);
         $this->csvEmailValidator->createValidationWithResume($records);
 
     }
