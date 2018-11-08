@@ -3,6 +3,8 @@
 namespace AppBundle\Command;
 
 use AppBundle\Service\CsvEmailValidator;
+use Iterator;
+use League\Csv\Reader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,6 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateCsvValidationResults extends Command
 {
+    //TODO: add progress bar
     /** @var CsvEmailValidator  */
     private $csvEmailValidator;
 
@@ -31,7 +34,10 @@ class GenerateCsvValidationResults extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->csvEmailValidator->validate();
-        return "test";
+        $filename = $input->getArgument('filename');
+        $reader = Reader::createFromPath('%kernel.root_dir%/../var/csv/'.$filename.'.csv');
+        $records = $reader->getRecords();
+        $this->csvEmailValidator->createValidationWithResume($records);
+
     }
 }

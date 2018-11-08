@@ -8,8 +8,11 @@
 
 namespace AppBundle\Service;
 
+use Iterator;
 
 interface DocumentValidatorInterface
 {
-    public function validate();
+    public function validate(Iterator $records, bool $outputType = null);
+
+    public function createValidationWithResume(Iterator $records);
 }
